@@ -74,3 +74,15 @@ For player history, every listed co-manager receives the full season's team stat
 
 - Beth and Matthew are separate All-Time entries for their individual 2021 teams. **Betthew** is a separate franchise entry covering only 2022–2025.
 - Rick and Sharon remain separate players, including their shared 2021 team.
+
+## Hall of Chumps
+
+The `Hall of Chumps` tab sits between `2026 Cost & Payouts` and `Surprise!` and lists entries newest-first:
+
+- 2025 — Sharon (Vimeo)
+- 2024 — Sharon (Vimeo)
+- 2023 — Eddie (YouTube)
+- 2022 — Ken (Pinterest pin + Tenor shame GIF)
+- 2021 — Debbie (`public/the-biggest-chump-2021.mp4`)
+
+The 2021 video is bundled in `public/` so it deploys with Vercel. The other media are external embeds and therefore require an internet connection when the site is viewed.

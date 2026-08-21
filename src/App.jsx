@@ -123,6 +123,49 @@ const PAYOUTS_2026 = [
   { label: 'Weekly High Scorer', amount: '$5' },
 ]
 
+
+
+const HALL_OF_CHUMPS = [
+  {
+    year: 2025,
+    chump: 'Sharon',
+    media: [{ type: 'vimeo', src: 'https://player.vimeo.com/video/1153244501?dnt=1', href: 'https://vimeo.com/1153244501' }],
+  },
+  {
+    year: 2024,
+    chump: 'Sharon',
+    media: [{ type: 'vimeo', src: 'https://player.vimeo.com/video/1108754169?dnt=1', href: 'https://vimeo.com/1108754169' }],
+  },
+  {
+    year: 2023,
+    chump: 'Eddie',
+    media: [{ type: 'youtube', src: 'https://www.youtube.com/embed/f-xXkWhQGtI' }],
+  },
+  {
+    year: 2022,
+    chump: 'Ken',
+    media: [
+      {
+        type: 'image',
+        src: 'https://media.tenor.com/d_MjD4WnrRgAAAAM/problemastecnicos-los-simpsons.gif',
+        href: 'https://media.tenor.com/d_MjD4WnrRgAAAAM/problemastecnicos-los-simpsons.gif',
+        label: 'Technical difficulties GIF',
+      },
+      {
+        type: 'tenor',
+        src: 'https://tenor.com/embed/4969023',
+        href: 'https://tenor.com/view/game-of-thrones-got-shame-nun-gif-4969023',
+        label: 'Shame nun GIF',
+      },
+    ],
+  },
+  {
+    year: 2021,
+    chump: 'Debbie',
+    media: [{ type: 'localVideo', src: '/the-biggest-chump-2021.mp4' }],
+  },
+]
+
 const YEARS = Object.keys(SEASONS).map(Number).sort((a, b) => b - a)
 
 function ownerName(owner) {
@@ -360,6 +403,9 @@ function App() {
           <button className={activeTab === 'payouts' ? 'active' : ''} onClick={() => setActiveTab('payouts')}>
             2026 Cost & Payouts
           </button>
+          <button className={activeTab === 'hall' ? 'active' : ''} onClick={() => setActiveTab('hall')}>
+            Hall of Chumps
+          </button>
           <button className={activeTab === 'surprise' ? 'active' : ''} onClick={() => setActiveTab('surprise')}>
             Surprise!
           </button>
@@ -584,6 +630,87 @@ function App() {
                   </article>
                 ))}
               </div>
+            </div>
+          </section>
+        )}
+
+        {activeTab === 'hall' && (
+          <section>
+            <div className="section-heading">
+              <p className="kicker">IMMORTALIZED IN INFAMY</p>
+              <h2>Hall of Chumps</h2>
+              <p>Every Chump deserves to be remembered. The newest induction is always at the top.</p>
+            </div>
+
+            <div className="hall-list">
+              {HALL_OF_CHUMPS.map((entry) => (
+                <article className="hall-card" key={entry.year}>
+                  <div className="hall-card__header">
+                    <div>
+                      <span className="hall-card__year">{entry.year}</span>
+                      <h3>{entry.chump}</h3>
+                    </div>
+                    <span className="hall-card__badge">CHUMP</span>
+                  </div>
+
+                  <div className={`hall-media ${entry.media.length > 1 ? 'hall-media--two' : ''}`}>
+                    {entry.media.map((media, index) => {
+                      const title = `${entry.year} ${entry.chump} Hall of Chumps ${index + 1}`
+
+                      if (media.type === 'localVideo') {
+                        return (
+                          <div className="hall-video-shell" key={media.src}>
+                            <video controls preload="metadata" playsInline>
+                              <source src={media.src} type="video/mp4" />
+                              Your browser does not support the video tag.
+                            </video>
+                          </div>
+                        )
+                      }
+
+                      if (media.type === 'image') {
+                        return (
+                          <div className="hall-image-shell" key={media.src}>
+                            <img src={media.src} alt={media.label ?? title} loading="lazy" />
+                          </div>
+                        )
+                      }
+
+                      if (media.type === 'pinterest' || media.type === 'tenor') {
+                        return (
+                          <div className={`hall-image-shell hall-image-shell--${media.type}`} key={media.src}>
+                            <iframe
+                              src={media.src}
+                              title={title}
+                              loading="lazy"
+                              allowFullScreen
+                            />
+                            <a href={media.href} target="_blank" rel="noreferrer">View source</a>
+                          </div>
+                        )
+                      }
+
+                      return (
+                        <div className="hall-video-shell" key={media.src}>
+                          <iframe
+                            src={media.src}
+                            title={title}
+                            loading="lazy"
+                            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                            referrerPolicy={media.type === 'vimeo' ? 'origin' : 'strict-origin-when-cross-origin'}
+                            allowFullScreen
+                          />
+                          {media.type === 'vimeo' && media.href && (
+                            <a className="hall-video-shell__fallback" href={media.href} target="_blank" rel="noreferrer">
+                              Open on Vimeo
+                            </a>
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
+                </article>
+              ))}
             </div>
           </section>
         )}

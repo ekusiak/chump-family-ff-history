@@ -505,3 +505,176 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* Hall of Chumps */
+.hall-list {
+  display: grid;
+  gap: 22px;
+}
+
+.hall-card {
+  padding: 22px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(19, 33, 51, 0.94), rgba(11, 22, 37, 0.94));
+}
+
+.hall-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 16px;
+}
+
+.hall-card__year {
+  color: #4ade80;
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+}
+
+.hall-card h3 {
+  margin: 3px 0 0;
+  color: #f8fafc;
+  font-size: 1.55rem;
+  letter-spacing: -0.03em;
+}
+
+.hall-card__badge {
+  padding: 7px 10px;
+  border: 1px solid rgba(248, 113, 113, 0.22);
+  border-radius: 999px;
+  background: rgba(239, 68, 68, 0.08);
+  color: #fca5a5;
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.hall-media {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+}
+
+.hall-media--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+}
+
+.hall-video-shell {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  background: #000;
+  aspect-ratio: 16 / 9;
+}
+
+.hall-video-shell iframe,
+.hall-video-shell video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.hall-video-shell video {
+  object-fit: contain;
+}
+
+.hall-image-shell {
+  position: relative;
+  display: grid;
+  min-height: 420px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  background: #0a1321;
+}
+
+.hall-image-shell iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  border: 0;
+  background: #fff;
+}
+
+.hall-image-shell img {
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  object-fit: contain;
+  background: #000;
+}
+
+.hall-video-shell__fallback {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 2;
+  padding: 7px 10px;
+  border-radius: 8px;
+  background: rgba(8, 17, 31, 0.88);
+  color: #f8fafc;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+}
+
+.hall-video-shell__fallback:hover {
+  color: #86efac;
+}
+
+.hall-image-shell--pinterest iframe {
+  max-width: 430px;
+  margin: 0 auto;
+}
+
+.hall-image-shell a {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  padding: 6px 9px;
+  border-radius: 8px;
+  background: rgba(8, 17, 31, 0.84);
+  color: #d1d5db;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-decoration: none;
+  backdrop-filter: blur(8px);
+}
+
+.hall-image-shell a:hover {
+  color: #86efac;
+}
+
+@media (max-width: 820px) {
+  .hall-media--two {
+    grid-template-columns: 1fr;
+  }
+
+  .hall-image-shell,
+  .hall-image-shell iframe,
+  .hall-image-shell img {
+    min-height: 360px;
+  }
+}
+
+@media (max-width: 520px) {
+  .hall-card {
+    padding: 16px;
+  }
+
+  .hall-image-shell,
+  .hall-image-shell iframe,
+  .hall-image-shell img {
+    min-height: 320px;
+  }
+}
