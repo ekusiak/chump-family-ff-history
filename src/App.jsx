@@ -120,7 +120,7 @@ const WEEKLY_HIGH_SCORERS_2025 = [
   { name: 'Kevin', weeks: [9] },
   { name: 'Debbie', weeks: [11, 13, 14] },
   { name: 'Betthew', weeks: [7, 12] },
-  { name: 'Aunt Sharon', weeks: [8] },
+  { name: 'Sharon', weeks: [8] },
   { name: 'Ken', weeks: [3, 4, 10] },
   { name: 'Kathy', weeks: [1] },
 ]
