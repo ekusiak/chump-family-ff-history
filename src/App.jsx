@@ -114,6 +114,21 @@ const PLAYOFFS = [
   { name: 'Matthew (solo)', appearances: 0, note: 'Matthew did not make the playoffs with his separate 2021 team.' },
 ]
 
+const WEEKLY_HIGH_SCORERS_2025 = [
+  { name: 'Eddie', weeks: [2, 5] },
+  { name: 'Henry', weeks: [6] },
+  { name: 'Kevin', weeks: [9] },
+  { name: 'Debbie', weeks: [11, 13, 14] },
+  { name: 'Betthew', weeks: [7, 12] },
+  { name: 'Aunt Sharon', weeks: [8] },
+  { name: 'Ken', weeks: [3, 4, 10] },
+  { name: 'Kathy', weeks: [1] },
+]
+
+const WEEKLY_HIGH_BY_WEEK_2025 = WEEKLY_HIGH_SCORERS_2025
+  .flatMap((player) => player.weeks.map((week) => ({ week, name: player.name })))
+  .sort((a, b) => a.week - b.week)
+
 const PAYOUTS_2026 = [
   { label: 'Buy-In', amount: '$25' },
   { label: '1st Place', amount: '$120' },
@@ -400,6 +415,9 @@ function App() {
           <button className={activeTab === 'playoffs' ? 'active' : ''} onClick={() => setActiveTab('playoffs')}>
             Playoff Appearances
           </button>
+          <button className={activeTab === 'weekly' ? 'active' : ''} onClick={() => setActiveTab('weekly')}>
+            2025 Weekly High Scorers
+          </button>
           <button className={activeTab === 'payouts' ? 'active' : ''} onClick={() => setActiveTab('payouts')}>
             2026 Cost & Payouts
           </button>
@@ -604,6 +622,43 @@ function App() {
               <p><strong>Shared 2021 team:</strong> Rick and Sharon made the playoffs together, so each receives 0.5 of an appearance.</p>
               <p><strong>Betthew:</strong> The shared Beth + Matthew team has 2 playoff appearances from 2022–2025. Beth also has 1 separate playoff appearance from 2021; Matthew had 0 in 2021.</p>
               <p><strong>League membership:</strong> Kathy and Callie were not members of the league in 2021.</p>
+            </div>
+          </section>
+        )}
+
+        {activeTab === 'weekly' && (
+          <section>
+            <div className="section-heading">
+              <p className="kicker">2025 WEEKLY BRAGGING RIGHTS</p>
+              <h2>2025 Weekly High Scorers</h2>
+              <p>Every regular-season weekly high scorer from Weeks 1 through 14.</p>
+            </div>
+
+            <div className="weekly-leaders">
+              {WEEKLY_HIGH_SCORERS_2025
+                .slice()
+                .sort((a, b) => b.weeks.length - a.weeks.length || Math.min(...a.weeks) - Math.min(...b.weeks))
+                .map((player) => (
+                  <article className="weekly-leader-card" key={player.name}>
+                    <div>
+                      <span className="weekly-leader-card__label">Weekly Highs</span>
+                      <strong>{player.name}</strong>
+                    </div>
+                    <div className="weekly-leader-card__count">{player.weeks.length}</div>
+                    <p>
+                      {player.weeks.length === 1 ? 'Week' : 'Weeks'} {player.weeks.join(', ')}
+                    </p>
+                  </article>
+                ))}
+            </div>
+
+            <div className="weekly-timeline" aria-label="2025 weekly high scorers by week">
+              {WEEKLY_HIGH_BY_WEEK_2025.map((item) => (
+                <div className="weekly-timeline__item" key={item.week}>
+                  <span>Week {item.week}</span>
+                  <strong>{item.name}</strong>
+                </div>
+              ))}
             </div>
           </section>
         )}
